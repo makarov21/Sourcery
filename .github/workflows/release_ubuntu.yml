@@ -32,7 +32,7 @@ jobs:
         id: build
         run: |
           BUILD_DIR="${HOME}/build/"
-          swift build --disable-sandbox -c release --static-swift-stdlib --build-path $BUILD_DIR
+          swift build --disable-sandbox -c release --build-path $BUILD_DIR
           mv "${BUILD_DIR}x86_64-unknown-linux-gnu/release/sourcery" "${BUILD_DIR}/sourcery"
           
           UNAME=$(uname -m)
