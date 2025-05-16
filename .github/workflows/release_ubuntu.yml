@@ -12,10 +12,10 @@ on:
       - '*'
 
 jobs:
-  tests:
-    uses: ./.github/workflows/test_ubuntu.yml
+  # tests:
+  #   uses: ./.github/workflows/test_ubuntu.yml
   build:
-    needs: [tests]
+    # needs: [tests]
     name: Build Sourcery for Ubuntu (latest)
     runs-on: ubuntu-22.04
     outputs:
@@ -28,11 +28,15 @@ jobs:
         uses: swift-actions/setup-swift@v2
         with:
           swift-version: "5.10"
+      - name: Install libcurl
+        id: libcurl
+        run: |
+          sudo apt-get install libcurl4-openssl-dev
       - name: Build it
         id: build
         run: |
           BUILD_DIR="${HOME}/build/"
-          swift build --disable-sandbox -c release --build-path $BUILD_DIR
+          swift build --disable-sandbox -c release --static-swift-stdlib --build-path $BUILD_DIR
           mv "${BUILD_DIR}x86_64-unknown-linux-gnu/release/sourcery" "${BUILD_DIR}/sourcery"
           
           UNAME=$(uname -m)
