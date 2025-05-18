@@ -24,10 +24,10 @@ jobs:
       - uses: actions/checkout@v3
         with:
           ref: ${{ github.event.inputs.ref }}
-      - name: Check GCC Version
+      - name: Check Libs
         id: check-libs
         run: |
-          cd /usr/lib/ && ls 
+          sudo find / -name libtinfo.so*
       - name: Check GCC Version
         id: check-gcc-version
         run: |
