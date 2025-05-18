@@ -27,7 +27,7 @@ jobs:
       - name: Check Libs
         id: check-libs
         run: |
-          sudo find / -name libtinfo.so*
+          echo $LD_LIBRARY_PATH
       - name: Check GCC Version
         id: check-gcc-version
         run: |
