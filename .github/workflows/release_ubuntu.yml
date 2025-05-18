@@ -60,6 +60,14 @@ jobs:
           popd
           
           echo "FILENAME=${FILENAME}" >> $GITHUB_OUTPUT
+      - name: Analyze libs
+        id: analyze-libs
+        run: |
+          readelf -V "~/${{ steps.build.outputs.FILENAME }}" | grep "Name: GLIBC"
+      - name: Analyze libs 2
+        id: analyze-libs-short
+        run: |
+          ldd "~/${{ steps.build.outputs.FILENAME }}"
       - name: 'Upload Artifact'
         uses: actions/upload-artifact@v4
         with:
