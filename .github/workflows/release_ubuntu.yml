@@ -27,7 +27,7 @@ jobs:
       - name: Check GCC Version
         id: check-libs
         run: |
-          cd /lib64 && ls 
+          cd /usr/lib/ && ls 
       - name: Check GCC Version
         id: check-gcc-version
         run: |
