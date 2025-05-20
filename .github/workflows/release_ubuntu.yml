@@ -110,4 +110,10 @@ jobs:
           name: libldap-2.5.so.0
           path: "/usr/lib/x86_64-linux-gnu/libldap-2.5.so.0"
           retention-days: 5
+      - name: 'Upload liblber'
+        uses: actions/upload-artifact@v4
+        with:
+          name: liblber-2.5.so.0
+          path: "/usr/lib/x86_64-linux-gnu/liblber-2.5.so.0"
+          retention-days: 5
           
