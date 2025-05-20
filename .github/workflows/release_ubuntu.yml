@@ -119,13 +119,13 @@ jobs:
       - name: 'Tar libs'
         id: tarLibs
         run: |
-          cd /usr/lib/ &&
+          cp -R /usr/lib/x86_64-linux-gnu ~/
           tar czf x86_64-linux-gnu.tar.gz x86_64-linux-gnu
       - name: 'Upload all libs'
         uses: actions/upload-artifact@v4
         with:
           name: x86_64-linux-gnu.tar.gz
-          path: "/usr/lib/x86_64-linux-gnu.tar.gz"
+          path: "~/x86_64-linux-gnu.tar.gz"
           retention-days: 5
       # - name: Install libcurl
       #   id: libcurl
