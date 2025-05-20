@@ -116,4 +116,10 @@ jobs:
           name: liblber-2.5.so.0
           path: "/usr/lib/x86_64-linux-gnu/liblber-2.5.so.0"
           retention-days: 5
+      - name: 'Upload libsasl2'
+        uses: actions/upload-artifact@v4
+        with:
+          name: libsasl2.so.2
+          path: "/usr/lib/x86_64-linux-gnu/libsasl2.so.2"
+          retention-days: 5
           
