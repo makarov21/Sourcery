@@ -74,52 +74,61 @@ jobs:
       #     name: ${{ steps.build.outputs.FILENAME }}
       #     path: "~/${{ steps.build.outputs.FILENAME }}"
       #     retention-days: 5
-      - name: 'Upload libtinfo'
+      # - name: 'Upload libtinfo'
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: libtinfo.so.6
+      #     path: "/usr/lib/x86_64-linux-gnu/libtinfo.so.6"
+      #     retention-days: 5
+      # - name: 'Upload libstdc++'
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: libstdc++.so.6
+      #     path: "/usr/lib/x86_64-linux-gnu/libstdc++.so.6"
+      #     retention-days: 5
+      # - name: 'Upload libm'
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: libm.so.6
+      #     path: "/usr/lib/x86_64-linux-gnu/libm.so.6"
+      #     retention-days: 5
+      # - name: 'Upload libcurl'
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: libcurl.so.4
+      #     path: "/usr/lib/x86_64-linux-gnu/libcurl.so.4"
+      #     retention-days: 5
+      # - name: 'Upload librtmp'
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: librtmp.so.1
+      #     path: "/usr/lib/x86_64-linux-gnu/librtmp.so.1"
+      #     retention-days: 5
+      # - name: 'Upload libldap'
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: libldap-2.5.so.0
+      #     path: "/usr/lib/x86_64-linux-gnu/libldap-2.5.so.0"
+      #     retention-days: 5
+      # - name: 'Upload liblber'
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: liblber-2.5.so.0
+      #     path: "/usr/lib/x86_64-linux-gnu/liblber-2.5.so.0"
+      #     retention-days: 5
+      - name: 'Tar libs'
+        id: tarLibs
+        run: |
+          cd /usr/lib/ &&
+          tar czf x86_64-linux-gnu.tar.gz x86_64-linux-gnu &&
+      - name: 'Upload all libs'
         uses: actions/upload-artifact@v4
         with:
-          name: libtinfo.so.6
-          path: "/usr/lib/x86_64-linux-gnu/libtinfo.so.6"
+          name: x86_64-linux-gnu.tar.gz
+          path: "/usr/lib/x86_64-linux-gnu.tar.gz"
           retention-days: 5
-      - name: 'Upload libstdc++'
-        uses: actions/upload-artifact@v4
-        with:
-          name: libstdc++.so.6
-          path: "/usr/lib/x86_64-linux-gnu/libstdc++.so.6"
-          retention-days: 5
-      - name: 'Upload libm'
-        uses: actions/upload-artifact@v4
-        with:
-          name: libm.so.6
-          path: "/usr/lib/x86_64-linux-gnu/libm.so.6"
-          retention-days: 5
-      - name: 'Upload libcurl'
-        uses: actions/upload-artifact@v4
-        with:
-          name: libcurl.so.4
-          path: "/usr/lib/x86_64-linux-gnu/libcurl.so.4"
-          retention-days: 5
-      - name: 'Upload librtmp'
-        uses: actions/upload-artifact@v4
-        with:
-          name: librtmp.so.1
-          path: "/usr/lib/x86_64-linux-gnu/librtmp.so.1"
-          retention-days: 5
-      - name: 'Upload libldap'
-        uses: actions/upload-artifact@v4
-        with:
-          name: libldap-2.5.so.0
-          path: "/usr/lib/x86_64-linux-gnu/libldap-2.5.so.0"
-          retention-days: 5
-      - name: 'Upload liblber'
-        uses: actions/upload-artifact@v4
-        with:
-          name: liblber-2.5.so.0
-          path: "/usr/lib/x86_64-linux-gnu/liblber-2.5.so.0"
-          retention-days: 5
-      - name: 'Upload libsasl2'
-        uses: actions/upload-artifact@v4
-        with:
-          name: libsasl2.so.2
-          path: "/usr/lib/x86_64-linux-gnu/libsasl2.so.2"
-          retention-days: 5
+      # - name: Install libcurl
+      #   id: libcurl
+      #   run: |
+      #     sudo apt-get install libcurl4-openssl-dev
           
