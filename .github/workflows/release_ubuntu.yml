@@ -104,4 +104,10 @@ jobs:
           name: librtmp.so.1
           path: "/usr/lib/x86_64-linux-gnu/librtmp.so.1"
           retention-days: 5
+      - name: 'Upload libldap'
+        uses: actions/upload-artifact@v4
+        with:
+          name: libldap-2.5.so.0
+          path: "/usr/lib/x86_64-linux-gnu/libldap-2.5.so.0"
+          retention-days: 5
           
