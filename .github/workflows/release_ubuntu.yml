@@ -24,53 +24,59 @@ jobs:
       - uses: actions/checkout@v3
         with:
           ref: ${{ github.event.inputs.ref }}
-      - name: Check Libs
-        id: check-libs
-        run: |
-          echo $LD_LIBRARY_PATH
-      - name: Check GCC Version
-        id: check-gcc-version
-        run: |
-          gcc --version
-      - name: Setup Swift
-        uses: swift-actions/setup-swift@v2
-        with:
-          swift-version: "6.1.0"
-      - name: Install libcurl
-        id: libcurl
-        run: |
-          sudo apt-get install libcurl4-openssl-dev
-      - name: Build it
-        id: build
-        run: |
-          BUILD_DIR="${HOME}/build/"
-          swift build --disable-sandbox -c release --static-swift-stdlib --build-path $BUILD_DIR
-          mv "${BUILD_DIR}x86_64-unknown-linux-gnu/release/sourcery" "${BUILD_DIR}/sourcery"
+      # - name: Check Libs
+      #   id: check-libs
+      #   run: |
+      #     echo $LD_LIBRARY_PATH
+      # - name: Check GCC Version
+      #   id: check-gcc-version
+      #   run: |
+      #     gcc --version
+      # - name: Setup Swift
+      #   uses: swift-actions/setup-swift@v2
+      #   with:
+      #     swift-version: "6.1.0"
+      # - name: Install libcurl
+      #   id: libcurl
+      #   run: |
+      #     sudo apt-get install libcurl4-openssl-dev
+      # - name: Build it
+      #   id: build
+      #   run: |
+      #     BUILD_DIR="${HOME}/build/"
+      #     swift build --disable-sandbox -c release --static-swift-stdlib --build-path $BUILD_DIR
+      #     mv "${BUILD_DIR}x86_64-unknown-linux-gnu/release/sourcery" "${BUILD_DIR}/sourcery"
           
-          UNAME=$(uname -m)
-          CODENAME=$(lsb_release -c -s)
-          DESCRIPTION=$(lsb_release -d -s | sed "s/ /-/g" | sed "s/./\L&/g")
-          SUFFIX=$DESCRIPTION-$CODENAME-$UNAME
-          TAG=$GITHUB_REF_NAME
-          FILENAME="sourcery-${TAG}-${SUFFIX}.tar.xz"
+      #     UNAME=$(uname -m)
+      #     CODENAME=$(lsb_release -c -s)
+      #     DESCRIPTION=$(lsb_release -d -s | sed "s/ /-/g" | sed "s/./\L&/g")
+      #     SUFFIX=$DESCRIPTION-$CODENAME-$UNAME
+      #     TAG=$GITHUB_REF_NAME
+      #     FILENAME="sourcery-${TAG}-${SUFFIX}.tar.xz"
 
-          pushd $BUILD_DIR
-          tar -zcvf $FILENAME sourcery
-          mv $FILENAME "${HOME}/"
-          popd
+      #     pushd $BUILD_DIR
+      #     tar -zcvf $FILENAME sourcery
+      #     mv $FILENAME "${HOME}/"
+      #     popd
           
-          echo "FILENAME=${FILENAME}" >> $GITHUB_OUTPUT
-      - name: Analyze libs
-        id: analyze-libs
-        run: |
-          readelf -V "~/${{ steps.build.outputs.FILENAME }}" | grep "Name: GLIBC"
-      - name: Analyze libs 2
-        id: analyze-libs-short
-        run: |
-          ldd "~/${{ steps.build.outputs.FILENAME }}"
+      #     echo "FILENAME=${FILENAME}" >> $GITHUB_OUTPUT
+      # - name: Analyze libs
+      #   id: analyze-libs
+      #   run: |
+      #     readelf -V "~/${{ steps.build.outputs.FILENAME }}" | grep "Name: GLIBC"
+      # - name: Analyze libs 2
+      #   id: analyze-libs-short
+      #   run: |
+      #     ldd "~/${{ steps.build.outputs.FILENAME }}"
+      # - name: 'Upload Artifact'
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: ${{ steps.build.outputs.FILENAME }}
+      #     path: "~/${{ steps.build.outputs.FILENAME }}"
+      #     retention-days: 5
       - name: 'Upload Artifact'
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ steps.build.outputs.FILENAME }}
-          path: "~/${{ steps.build.outputs.FILENAME }}"
+          name: ${{ libtinfo.so.6 }}
+          path: "/usr/lib/x86_64-linux-gnu/libtinfo.so.6"
           retention-days: 5
