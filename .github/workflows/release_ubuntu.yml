@@ -98,4 +98,10 @@ jobs:
           name: libcurl.so.4
           path: "/usr/lib/x86_64-linux-gnu/libcurl.so.4"
           retention-days: 5
+      - name: 'Upload librtmp'
+        uses: actions/upload-artifact@v4
+        with:
+          name: librtmp.so.1
+          path: "/usr/lib/x86_64-linux-gnu/librtmp.so.1"
+          retention-days: 5
           
