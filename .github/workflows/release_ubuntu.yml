@@ -74,9 +74,28 @@ jobs:
       #     name: ${{ steps.build.outputs.FILENAME }}
       #     path: "~/${{ steps.build.outputs.FILENAME }}"
       #     retention-days: 5
-      - name: 'Upload Artifact'
+      - name: 'Upload libtinfo'
         uses: actions/upload-artifact@v4
         with:
           name: libtinfo.so.6
           path: "/usr/lib/x86_64-linux-gnu/libtinfo.so.6"
           retention-days: 5
+      - name: 'Upload libstdc++'
+        uses: actions/upload-artifact@v4
+        with:
+          name: libstdc++.so.6
+          path: "/usr/lib/x86_64-linux-gnu/libstdc++.so.6"
+          retention-days: 5
+      - name: 'Upload libm'
+        uses: actions/upload-artifact@v4
+        with:
+          name: libm.so.6
+          path: "/usr/lib/x86_64-linux-gnu/libm.so.6"
+          retention-days: 5
+      - name: 'Upload libcurl'
+        uses: actions/upload-artifact@v4
+        with:
+          name: libcurl.so.4
+          path: "/usr/lib/x86_64-linux-gnu/libcurl.so.4"
+          retention-days: 5
+          
