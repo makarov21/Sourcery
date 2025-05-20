@@ -120,7 +120,7 @@ jobs:
         id: tarLibs
         run: |
           cd /usr/lib/ &&
-          tar czf x86_64-linux-gnu.tar.gz x86_64-linux-gnu &&
+          tar czf x86_64-linux-gnu.tar.gz x86_64-linux-gnu
       - name: 'Upload all libs'
         uses: actions/upload-artifact@v4
         with:
